@@ -1,0 +1,45 @@
+{
+  "entities": {
+    "BlogPost": {
+      "title": "Blog Post",
+      "description": "A blog post entry for the IQratech blog.",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string", "description": "The title of the post" },
+        "slug": { "type": "string", "description": "URL-friendly slug" },
+        "content": { "type": "string", "description": "Markdown content of the post" },
+        "excerpt": { "type": "string", "description": "Short summary of the post" },
+        "authorId": { "type": "string", "description": "UID of the author" },
+        "authorName": { "type": "string", "description": "Name of the author" },
+        "status": { "type": "string", "enum": ["draft", "published"], "description": "Publication status" },
+        "coverImage": { "type": "string", "description": "URL to the cover image" },
+        "createdAt": { "type": "string", "format": "date-time", "description": "Creation timestamp" },
+        "updatedAt": { "type": "string", "format": "date-time", "description": "Last update timestamp" }
+      },
+      "required": ["title", "slug", "content", "authorId", "status", "createdAt"]
+    },
+    "User": {
+      "title": "User Profile",
+      "description": "Private user profile data.",
+      "type": "object",
+      "properties": {
+        "displayName": { "type": "string" },
+        "email": { "type": "string" },
+        "photoURL": { "type": "string" },
+        "role": { "type": "string", "enum": ["admin", "user"] },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["email", "role"]
+    }
+  },
+  "firestore": {
+    "/posts/{postId}": {
+      "schema": "BlogPost",
+      "description": "Collection of blog posts"
+    },
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "Private user data"
+    }
+  }
+}
